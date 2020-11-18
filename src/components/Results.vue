@@ -75,5 +75,6 @@ li {
   font-size: 16px;
   font-weight: bold;
   color: #000000;
+  text-transform: uppercase;
 }
 </style>
