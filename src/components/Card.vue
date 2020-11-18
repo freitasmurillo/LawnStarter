@@ -70,4 +70,8 @@ export default {
 .CardContent > div:last-child {
   padding-left: 15px;
 }
+
+.CardLeft p {
+  white-space: pre-line;
+}
 </style>
