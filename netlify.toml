@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/swapi/*"
-  to = "https://swapi.dev/api/:splat"
+  to = "http://swapi.dev/api/:splat"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
