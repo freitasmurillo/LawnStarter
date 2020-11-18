@@ -17,7 +17,10 @@ const routes = [
   { path: '/', component: Search },
 ]
 
-const router = new VueRouter({ routes })
+const router = new VueRouter({ 
+  mode: 'history',
+  routes
+})
 
 Vue.config.productionTip = false
 
