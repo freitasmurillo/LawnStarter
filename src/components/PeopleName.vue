@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { SWAPI } from '../services'
+
 export default {
   name: 'PeopleName',
   props: {
@@ -31,10 +33,10 @@ export default {
   },
   methods: {
     async fetchCharacterName() {
-      const result = await fetch(this.source)
+      const id = this.source.match(/(\d+)\/?$/)[1]
       this.charInfo = {
-        ...await result.json(),
-        id: this.source.match(/(\d+)\/?$/)[1]
+        ...await SWAPI.fetchPeople(id),
+        id
       }
     }
   }

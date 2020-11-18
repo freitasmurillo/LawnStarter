@@ -29,6 +29,7 @@
 import Card from '../components/Card'
 import Button from '../components/Button'
 import PeopleName from '../components/PeopleName'
+import { SWAPI } from '../services'
 
 export default {
   name: 'FilmView',
@@ -39,7 +40,6 @@ export default {
   },
   data() {
     return {
-      source: 'https://swapi.dev/api',
       movieInfo: {
         characters: [],
         opening_crawl: '',
@@ -48,8 +48,7 @@ export default {
     }
   },
   async created() {
-    const fetchRequest = await fetch(`${this.source}/films/${this.$route.params.filmId}`)
-    this.movieInfo = await fetchRequest.json()
+    this.movieInfo = await SWAPI.fetchFilm(this.$route.params.filmId)
   }
 };
 </script>

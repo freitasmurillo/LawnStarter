@@ -1,14 +1,16 @@
 <template>
   <router-link
-    :to="{ path: `/films/${movieInfo.id}`}"
+    :to="{ path: `/films/${filmInfo.id}`}"
     v-slot="{ href }"
   >
-    <a :href="href">{{ movieInfo.title }}</a>
+    <a :href="href">{{ filmInfo.title }}</a>
     <span v-if="!isLast">, </span>
   </router-link>
 </template>
 
 <script>
+import { SWAPI } from '../services'
+
 export default {
   name: 'FilmName',
   props: {
@@ -23,21 +25,21 @@ export default {
   },
   data() {
     return {
-      movieInfo: {
+      filmInfo: {
         id: 0,
         title: ''
       }
     }
   },
   async created() {
-    await this.fetchMovieName()
+    await this.fetchFilmName()
   },
   methods: {
-    async fetchMovieName() {
-      const result = await fetch(this.source)
-      this.movieInfo = {
-        ...await result.json(),
-        id: this.source.match(/(\d+)\/?$/)[1]
+    async fetchFilmName() {
+      const filmId = this.source.match(/(\d+)\/?$/)[1]
+      this.filmInfo = {
+        ...await SWAPI.fetchFilm(filmId),
+        id: filmId
       }
     }
   }

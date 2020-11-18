@@ -41,6 +41,7 @@
 import Card from '../components/Card'
 import Button from '../components/Button'
 import FilmName from '../components/FilmName'
+import { SWAPI } from '../services'
 
 export default {
   name: 'PeopleView',
@@ -51,13 +52,11 @@ export default {
   },
   data() {
     return {
-      source: 'https://swapi.dev/api',
       charInfo: { }
     }
   },
   async created() {
-    const fetchRequest = await fetch(`${this.source}/people/${this.$route.params.peopleId}`)
-    this.charInfo = await fetchRequest.json()
+    this.charInfo = await SWAPI.fetchPeople(this.$route.params.peopleId)
   }
 }
 </script>

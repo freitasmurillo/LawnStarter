@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import SWAPI from '../services'
+import { SWAPI } from '../services'
 
 Vue.use(Vuex);
 
