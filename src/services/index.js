@@ -1,6 +1,6 @@
 
 class SWAPI {
-  BASE_URL = 'https://swapi.dev/api'
+  BASE_URL = process.env.VUE_APP_SWAPI_BASE_URL
 
    async fetchSWAPI(url) {
     const result = await fetch(`${this.BASE_URL}/${url}`)
