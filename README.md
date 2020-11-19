@@ -1,5 +1,9 @@
 # star-wars
 
+## Preview
+`https://lawnstarter.netlify.app/`
+
+# 
 ## Project setup
 ```
 docker-compose run app yarn
@@ -18,4 +22,11 @@ docker-compose run app yarn build
 ### Lints and fixes files
 ```
 docker-compose run app yarn lint
+```
+
+#
+## Routes
+```
+/
+/stats
 ```
