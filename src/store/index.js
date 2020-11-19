@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { SWAPI } from '../services'
+import { SWAPI, SQSClient } from '../services'
 
 Vue.use(Vuex);
 
@@ -9,11 +9,23 @@ const state = {
   isLoading: false,
   searchType: 'people',
   searchKey: '',
+  stats: {
+    requests: 0,
+    total: {
+      count: 0,
+    },
+    last: {
+      count: 0,
+      type: '',
+      search: ''
+    }
+  }
 }
 
 const getters = {
   stateType: ({ searchType }) => searchType,
-  stateKey: ({ searchKey }) => searchKey
+  stateKey: ({ searchKey }) => searchKey,
+  stateStats: ({ stats }) => stats
 }
 
 const mutations = {
@@ -28,7 +40,7 @@ const mutations = {
   },
   CHANGE_SEARCH_KEY: (s, key) => {
     s.searchKey = key;
-  },
+  }
 }
 
 const actions = {
@@ -37,8 +49,23 @@ const actions = {
     const result = await SWAPI.search(state.searchType, state.searchKey)
     commit('CHANGE_ITEMS', result.results)
     commit('TOGGLE_LOADING', false);
+    SQSClient.publishMessage({ searchType: state.searchType, searchKey: state.searchKey, result })
   }
  }
+
+export const computeStat = (message) => {
+  const body = JSON.parse(message.Body)
+  state.stats.requests++
+  state.stats.total = {
+    count: state.stats.total.count + body.result.count
+  },
+  state.stats.last = {
+    count: body.result.count,
+    type: body.searchType,
+    search: body.searchKey
+  }
+  
+}
 
 export default new Vuex.Store({
   actions,
