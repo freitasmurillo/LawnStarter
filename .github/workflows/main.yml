@@ -9,6 +9,7 @@ jobs:
     name: Green
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - id: pod-green
         uses: freitasmurillo/githubactions/autosync-openpr@v1
         with:
@@ -17,6 +18,7 @@ jobs:
     name: Indigo
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - id: pod-indigo
         uses: freitasmurillo/githubactions/autosync-openpr@v1
         with:
@@ -25,6 +27,7 @@ jobs:
     name: Red
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - id: pod-red
         uses: freitasmurillo/githubactions/autosync-openpr@v1
         with:
