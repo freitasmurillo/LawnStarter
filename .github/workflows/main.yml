@@ -11,16 +11,11 @@ jobs:
     steps:
       - name: Open Auto Sync PR
         id: pr_open
-        uses: "actions/github-script@v3"
+        uses: tretuna/sync-branches@1.1.0
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const repository = context.repo
-            await github.pulls.create({
-              title: 'AutoSync Master into Pod Branch',
-              owner: repository.owner,
-              repo: repository.repo,
-            })
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: "main"
+          TO_BRANCH: "pod-green"
       - name: Merge Auto Sync PR
         uses: "actions/github-script@v3"
         with:
