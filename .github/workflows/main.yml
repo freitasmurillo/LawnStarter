@@ -1,34 +1,78 @@
-name: Auto Sync Main Into Pod Branches
+name: Sync Team Branches With Master
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   green:
     name: Green
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - id: pod-green
-        uses: freitasmurillo/githubactions/autosync-openpr@v2
+      - name: Open PR
+        id: pr_open
+        uses: tretuna/sync-branches@1.1.0
         with:
-          mergeInto: 'pod-green'
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: "master"
+          TO_BRANCH: "pod-green"
+      - name: Merge PR
+        uses: "actions/github-script@v3"
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const repository = context.repo
+            await github.pulls.merge({
+              merge_method: "merge",
+              owner: repository.owner,
+              pull_number: ${{ steps.pr_open.outputs.PULL_REQUEST_NUMBER }},
+              repo: repository.repo,
+            })
+
   indigo:
     name: Indigo
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - id: pod-indigo
-        uses: freitasmurillo/githubactions/autosync-openpr@v2
+      - name: Open PR
+        id: pr_open
+        uses: tretuna/sync-branches@1.1.0
         with:
-          mergeInto: 'pod-indigo'
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: "master"
+          TO_BRANCH: "pod-indigo"
+      - name: Merge PR
+        uses: "actions/github-script@v3"
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const repository = context.repo
+            await github.pulls.merge({
+              merge_method: "merge",
+              owner: repository.owner,
+              pull_number: ${{ steps.pr_open.outputs.PULL_REQUEST_NUMBER }},
+              repo: repository.repo,
+            })
+  
   red:
     name: Red
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - id: pod-red
-        uses: freitasmurillo/githubactions/autosync-openpr@v2
+      - name: Open PR
+        id: pr_open
+        uses: tretuna/sync-branches@1.1.0
         with:
-          mergeInto: 'pod-red'
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          FROM_BRANCH: "master"
+          TO_BRANCH: "pod-red"
+      - name: Merge PR
+        uses: "actions/github-script@v3"
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const repository = context.repo
+            await github.pulls.merge({
+              merge_method: "merge",
+              owner: repository.owner,
+              pull_number: ${{ steps.pr_open.outputs.PULL_REQUEST_NUMBER }},
+              repo: repository.repo,
+            })
