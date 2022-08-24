@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: pod-green
-        uses: freitasmurillo/githubactions/autosync-openpr@v1
+        uses: freitasmurillo/githubactions/autosync-openpr@v2
         with:
           mergeInto: 'pod-green'
   indigo:
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: pod-indigo
-        uses: freitasmurillo/githubactions/autosync-openpr@v1
+        uses: freitasmurillo/githubactions/autosync-openpr@v2
         with:
           mergeInto: 'pod-indigo'
   red:
@@ -29,6 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: pod-red
-        uses: freitasmurillo/githubactions/autosync-openpr@v1
+        uses: freitasmurillo/githubactions/autosync-openpr@v2
         with:
           mergeInto: 'pod-red'
