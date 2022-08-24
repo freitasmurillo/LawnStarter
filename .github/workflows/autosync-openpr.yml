@@ -1,0 +1,32 @@
+name: 'Auto Sync Main Into Pod Branch'
+description: 'Auto Sync Main Into Pod Branch'
+inputs:
+  mergeInto:
+    description: 'Merge Master Into'
+    required: true
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - name: Open Auto Sync PR
+      id: pr_open
+      uses: tretuna/sync-branches@1.1.0
+      with:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        FROM_BRANCH: "main"
+        TO_BRANCH: ${{ inputs.mergeInto }}
+    - name: Merge Auto Sync PR
+      uses: "actions/github-script@v3"
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const repository = context.repo
+          await github.pulls.merge({
+            merge_method: "merge",
+            owner: repository.owner,
+            pull_number: ${{ steps.pr_open.outputs.PULL_REQUEST_NUMBER }},
+            repo: repository.repo,
+          })
