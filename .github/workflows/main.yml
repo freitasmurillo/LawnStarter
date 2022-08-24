@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: pod-green
-        uses: actions/autosync-openpr@v1
+        uses: githubactions/autosync-openpr@v1
         with:
           mergeInto: 'pod-green'
   indigo:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: pod-indigo
-        uses: actions/autosync-openpr@v1
+        uses: githubactions/autosync-openpr@v1
         with:
           mergeInto: 'pod-indigo'
   red:
@@ -26,6 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: pod-red
-        uses: actions/autosync-openpr@v1
+        uses: githubactions/autosync-openpr@v1
         with:
           mergeInto: 'pod-red'
