@@ -2,7 +2,7 @@ name: Sync Team Branches With Master
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   green:
@@ -14,7 +14,7 @@ jobs:
         uses: tretuna/sync-branches@1.1.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "master"
+          FROM_BRANCH: "main"
           TO_BRANCH: "pod-green"
       - name: Merge PR
         uses: "actions/github-script@v3"
@@ -38,7 +38,7 @@ jobs:
         uses: tretuna/sync-branches@1.1.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "master"
+          FROM_BRANCH: "main"
           TO_BRANCH: "pod-indigo"
       - name: Merge PR
         uses: "actions/github-script@v3"
@@ -63,7 +63,7 @@ jobs:
         uses: tretuna/sync-branches@1.1.0
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: "master"
+          FROM_BRANCH: "main"
           TO_BRANCH: "pod-red"
       - name: Merge PR
         uses: "actions/github-script@v3"
